@@ -1,8 +1,9 @@
 # port-scanner
 A simple CLI program for scanning ports on a network.
 
-## v1
 ---
+
+## v1
 
 Simple scanner. 
 No threading. 
