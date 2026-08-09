@@ -28,7 +28,7 @@ def scan(target: str, port: int) -> bool:
 # Arguments when running
 if len(sys.argv) == 2:
     target = sys.argv[1]
-    print(f"{BLUE}Scanning {target}...{RESET}")
+    print(f"{BLUE}Scanning '{target}'...{RESET}\n")
 
     # Sequentially run the scan() function
     for i in range(1, 65536):
