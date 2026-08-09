@@ -5,12 +5,10 @@ A simple CLI program for scanning ports on a network.
 
 ## v1
 
-Simple scanner using the ```socket``` library. Execute the program alongside a hostname to run.
+Sequential TCP scanner using the ```socket``` library. Scans all 65535 ports on a given target and reports which are open.
 <br>
-Example usage: ```> python main.py scanme.nmap.org```
+Usage: ```> python main.py <target>```
 <br>
-No threading. No additional arguments.
-
-## v2
-
-Includes threading for efficiency.
+Example: ```> python main.py scanme.nmap.org```
+<br>
+No threading. No port range or other arguments yet.
