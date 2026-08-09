@@ -15,6 +15,8 @@ RESET = "\033[0m"
 # SOCK_STREAM means a reliable, connected byte stream (maps to TCP)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+# Function to scan the target and each respective port
+# NOTE: Add catches for network errors later
 def scan(target: str, port: int) -> bool:
     try:
         conn = s.connect((target, port))
@@ -22,12 +24,15 @@ def scan(target: str, port: int) -> bool:
     except:
         return False
 
+# Arguments when running
 if len(sys.argv) == 2:
     target = sys.argv[1]
+
+    # Sequentially run the scan() function
     for i in range(1, 65536):
         if scan(target, i):
             print(f"{GREEN}Port {i} is open.{RESET}")
         else:
             print(f"Port {i} is closed.")
-else:
-    print(f"{RED}ERROR: Not enough arguments. Please reference an IP address or hostname to scan.{RESET}")
+else: # Fallback for if the user does not specify any arguments
+    print(f"{RED}ERROR: Not enough arguments. Please specify an IP address or hostname to scan.{RESET}")
