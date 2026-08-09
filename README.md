@@ -10,3 +10,7 @@ Simple scanner using the ```socket``` library. Execute the program alongside a h
 Example usage: ```> python main.py scanme.nmap.org```
 <br>
 No threading. No additional arguments.
+
+## v2
+
+Includes threading for efficiency.
