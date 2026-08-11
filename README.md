@@ -1,6 +1,6 @@
 # port-scanner
 
-A simple CLI program for scanning ports on a network using ```socket```
+A simple CLI program for scanning ports on a network using ```socket```.
 <br>
 This was built to better understand indirectly how nmap functions behind the scenes.
 
