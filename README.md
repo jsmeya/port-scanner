@@ -15,3 +15,9 @@ Usage: ```> python main.py <target>```
 Example: ```> python main.py scanme.nmap.org```
 <br>
 No threading. No port range or other arguments yet.
+
+## Roadmap
+
+- **v2** — Threading for faster scans.
+- **v3** — Port ranges, including reading targets/ports from a file.
+- **v4** — Service and version detection.
