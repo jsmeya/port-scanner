@@ -1,4 +1,4 @@
-# jSCAN port scanner by Justin Smeya
+# Simple CLI port scanner by Justin Smeya
 
 # Imports
 import sys
