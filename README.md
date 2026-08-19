@@ -21,3 +21,4 @@ No threading. No port range or other arguments yet.
 - **v2** — Threading for faster scans.
 - **v3** — Port ranges, including reading targets/ports from a file.
 - **v4** — Service and version detection.
+- **V5** — May add implementation for sending RST instead of ACK for stealth.

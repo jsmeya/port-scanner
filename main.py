@@ -3,6 +3,7 @@
 # Imports
 import sys
 import socket
+from concurrent.futures import ThreadPoolExecutor
 
 # Colors :)
 BLUE = "\033[34m"
@@ -13,14 +14,11 @@ RESET = "\033[0m"
 # Function to scan the target and each respective port
 def scan(target: str, port: int) -> bool:
     try:
-        # Creates a new endpoint and returns one socket object
-        # AF_INET means a communication of standard 32-bit, IPv4 addresses paired with port numbers. Supports hostnames as well.
-        # SOCK_STREAM means a reliable, connected byte stream (maps to TCP)
+        # AF_INET = IPv4 (supports hostnames too)
+        # SOCK_STREAM = TCP
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.settimeout(0.5)
-            # Sets up a network link using the specified IP/hostname and port.
-            # Then attempts to connect to that link.
-            s.connect((target, port))
+            s.connect((target, port)) # Attempts to connect to network link
             return True
     except (socket.timeout, OSError):
         return False
@@ -31,7 +29,7 @@ if len(sys.argv) == 2:
     print(f"{BLUE}Scanning '{target}'...{RESET}\n")
 
     # Sequentially run the scan() function
-    for i in range(1, 65536):
+    for i in port_range:
         if scan(target, i):
             print(f"{GREEN}Port {i} is open.{RESET}")
         else:
