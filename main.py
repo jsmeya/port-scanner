@@ -11,6 +11,8 @@ GREEN = "\033[32m"
 RED = "\033[31m"
 RESET = "\033[0m"
 
+port_range = range(1, 65536)
+
 # Function to scan the target and each respective port
 def scan(target: str, port: int) -> bool:
     try:
