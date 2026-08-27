@@ -16,9 +16,18 @@ Example: ```> python main.py scanme.nmap.org```
 <br>
 No threading. No port range or other arguments yet.
 
+## v2
+
+Threaded TCP scanner using ```ThreadPoolExecutor```. Distributes port scans across a pool of worker threads for significantly faster scans compared to v1's sequential approach.
+<br>
+Usage: ```> python main.py <target>```
+<br>
+Example: ```> python main.py scanme.nmap.org```
+<br>
+Still scans all 65535 ports; no configurable range or worker count yet.
+
 ## Roadmap
 
-- **v2** — Threading for faster scans.
-- **v3** — Port ranges, including reading targets/ports from a file.
+- **v3** — Port ranges, worker count, and timeout as CLI arguments; reading targets/ports from a file.
 - **v4** — Service and version detection.
-- **V5** — May add implementation for sending RST instead of completing ACK for stealth.
+- **v5** — May add implementation for sending RST instead of completing ACK for stealth.
