@@ -6,26 +6,6 @@ This was built to better understand indirectly how a port scanner like **nmap** 
 
 ---
 
-## v1.0
-
-Sequential TCP scanner using the ```socket``` library. Scans all 65535 ports on a given target and reports which are open.
-<br>
-Usage: ```> python main.py <target>```
-<br>
-Example: ```> python main.py scanme.nmap.org```
-<br>
-No threading. No port range or other arguments yet.
-
-## v2.0
-
-Threaded TCP scanner using ```ThreadPoolExecutor```. Distributes port scans across a pool of worker threads for significantly faster scans compared to v1's sequential approach.
-<br>
-Usage: ```> python main.py <target>```
-<br>
-Example: ```> python main.py scanme.nmap.org```
-<br>
-Still scans all 65535 ports; no configurable range or worker count yet.
-
 ## v3.0
 
 Configurable, threaded TCP scanner built on ```argparse```.
@@ -40,7 +20,25 @@ Example: ```> python main.py scanme.nmap.org -p 22,80,1000-2000 -w 200 -t 0.5```
 - The target hostname/IP is resolved once upfront; an unresolvable target now fails fast with a clear error instead of silently reporting every port as closed.
 - Output only lists open ports, with a closing note that anything unlisted is closed, filtered, or a UDP-only service (TCP connect scans can't see e.g. DNS's UDP:53).
 
-Not included in v3: reading targets/ports from a file — deferred to a later version.
+## v2.0
+
+Threaded TCP scanner using ```ThreadPoolExecutor```. Distributes port scans across a pool of worker threads for significantly faster scans compared to v1's sequential approach.
+<br>
+Usage: ```> python main.py <target>```
+<br>
+Example: ```> python main.py scanme.nmap.org```
+<br>
+Still scans all 65535 ports; no configurable range or worker count yet.
+
+## v1.0
+
+Sequential TCP scanner using the ```socket``` library. Scans all 65535 ports on a given target and reports which are open.
+<br>
+Usage: ```> python main.py <target>```
+<br>
+Example: ```> python main.py scanme.nmap.org```
+<br>
+No threading. No port range or other arguments yet.
 
 ## Roadmap
 
