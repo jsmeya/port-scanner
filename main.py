@@ -67,6 +67,7 @@ default_workers = min(MAX_WORKERS, (os.cpu_count() or 4) * 50)
 def parse_args():
     # Initializing the parser
     parser = argparse.ArgumentParser(
+        usage="%(prog)s [target (IP/HOSTNAME)] [-p PORTS] [-w WORKERS] [-t TIMEOUT] [-h (help)]",
         description="A basic, threaded TCP port scanner."
     )
 
@@ -96,7 +97,7 @@ def parse_args():
     parser.add_argument(
         "-t", "--timeout",
         type=bounded_timeout,
-        default=0.5,
+        default=1,
         help=f"Timeout interval, in seconds, for an attempted connection (0-{max_timeout})."
     )
 
@@ -114,8 +115,9 @@ def main():
     for result, port in results:
         if result == True:
             print(f"{GREEN}Port {port} is open.{RESET}")
-        elif result == False:
-            print(f"Port {port} is closed.")
+        # elif result == False:
+        #     print(f"Port {port} is closed.")
+    print("Any ports not listed are closed, filtered, or listen over UDP and not TCP.")
 
 if __name__ == "__main__":
     main()
