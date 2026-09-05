@@ -1,6 +1,7 @@
 # Simple CLI port scanner by Justin Smeya
 
 # Imports
+import os
 import socket
 from concurrent.futures import ThreadPoolExecutor
 from itertools import repeat
@@ -43,6 +44,25 @@ def parse_ports(value: str) -> list[int]:
 
     return sorted(ports)
 
+
+# Upper bound on threads regardless of CPU count, to avoid crazy pool sizes
+MAX_WORKERS = 1000
+
+def worker_count(value: str) -> int:
+    ivalue = int(value)
+    if not (1 <= ivalue <= MAX_WORKERS):
+        raise argparse.ArgumentTypeError(f"Workers must be between 1 and {MAX_WORKERS}, got {ivalue}")
+    return ivalue
+
+max_timeout = 5
+def bounded_timeout(value: str) -> float:
+    fvalue = float(value)
+    if not (0 < fvalue <= max_timeout):
+        raise argparse.ArgumentTypeError(f"Timeout must be between 0 and {max_timeout} seconds, got {fvalue}")
+    return fvalue
+
+default_workers = min(MAX_WORKERS, (os.cpu_count() or 4) * 50)
+
 # Parsing arguments
 def parse_args():
     # Initializing the parser
@@ -67,17 +87,17 @@ def parse_args():
     # Thread pool size
     parser.add_argument(
         "-w", "--workers",
-        type=int,
-        default=100,
-        help="Number of worker threads."
+        type=worker_count,
+        default=default_workers,
+        help=f"Number of worker threads (1-{MAX_WORKERS}). Defaults to a multiple of CPU cores ({default_workers} on this machine)."
     )
 
     # Socket timeout (s)
     parser.add_argument(
         "-t", "--timeout",
-        type=float,
+        type=bounded_timeout,
         default=0.5,
-        help="Timeout interval, in seconds, for an attempted connection."
+        help=f"Timeout interval, in seconds, for an attempted connection (0-{max_timeout})."
     )
 
     return parser.parse_args()
