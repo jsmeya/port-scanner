@@ -106,11 +106,19 @@ def parse_args():
 def main():
     args = parse_args()
 
+    # Resolve host once upfront to make sure it's a real host.
+    # Kind of like a ping, I suppose
+    try:
+        resolved_target = socket.gethostbyname(args.target)
+    except socket.gaierror:
+        print(f"{RED}ERROR: Could not resolve target '{args.target}'.{RESET}")
+        raise SystemExit(1)
+
     print(f"{BLUE}Scanning '{args.target}'...{RESET}\n")
 
     # Scan ports
     with ThreadPoolExecutor(max_workers=args.workers) as executor:
-        results = executor.map(scan, repeat(args.target), args.ports, repeat(args.timeout))
+        results = executor.map(scan, repeat(resolved_target), args.ports, repeat(args.timeout))
 
     for result, port in results:
         if result == True:
