@@ -28,6 +28,6 @@ Still scans all 65535 ports; no configurable range or worker count yet.
 
 ## Roadmap
 
-- **v3.0** — Port ranges, worker count, and timeout as CLI arguments; reading targets/ports from a file.
+- **v3.0** — Port ranges, worker count, and timeout as CLI arguments;
 - **v4.0** — Service and version detection.
 - **v5.0** — May add implementation for sending RST instead of completing ACK for stealth.
